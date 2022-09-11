@@ -1,8 +1,4 @@
-# SPDX-FileCopyrightText: 2018 Kattni Rembor for Adafruit Industries
-#
-# SPDX-License-Identifier: MIT
-
-"""CircuitPython Essentials Internal RGB LED red, green, blue example"""
+# Reference: Adafruit - RGB Led
 import board
 import time
 print("Start")
@@ -16,9 +12,10 @@ else:
 
     led = neopixel.NeoPixel(board.NEOPIXEL, 1)
 
-led.brightness = 0.5
+led.brightness = 0.5  # setting initial brightness
 
 
+# defining colors used repeated
 def red():
     led[0] = (255, 0, 0)
 
@@ -50,55 +47,54 @@ def black():
 def white():
     led[0] = (255, 255, 255)
 
+# There are two parts to the song which are repeated many times
+
 
 def part1():
+    # starting alternating beats
     for i in range(3):
         red()
         time.sleep(0.2)
         blue()
         time.sleep(0.2)
 
-    #led[0] = (255, 0, 0)
+    # small bridge before the beginning of the next section
     red()
     time.sleep(0.2)
-    #led[0] = (0, 255, 0)
     green()
     time.sleep(0.2)
-    #led[0] = (0, 0, 255)
     blue()
     time.sleep(0.2)
-    #led[0] = (0, 255, 0)
     green()
     time.sleep(0.2)
 
+    # fading brightness of different colors to showcase the repeated fading music
     for i in range(5, 0, -1):
         led.brightness = i/10
-        #led[0] = (255, 0, 0)
         red()
-
         time.sleep(0.3)
 
     for i in range(5, 0, -1):
         led.brightness = i/10
-        #led[0] = (0, 0, 255)
         blue()
-
         time.sleep(0.3)
 
     for i in range(5, 0, -1):
         led.brightness = i/10
-        #led[0] = (0, 255, 0)
         green()
-
         time.sleep(0.3)
+
+# part two of the music - the music was more cheerful here so vibrant colors have been used
 
 
 def part2():
+    # starts with a fade in as the music increases
     for i in range(1, 6):
         led.brightness = i/10
         aqua()
         time.sleep(0.3)
 
+    # fade-outs to depict the repeated fading music again
     for i in range(5, 0, -1):
         led.brightness = i/10
         yellow()
@@ -120,8 +116,12 @@ def part2():
         time.sleep(0.25)
 
 
+# Main Program
+# Gives the cue to the user to start the music
 white()
 time.sleep(1)
+
+# Music Sequence
 for i in range(4):
     part1()
 
@@ -135,6 +135,7 @@ part2()
 for i in range(2):
     part1()
 
+# Depicts end of music
 white()
 time.sleep(1)
 print("Done")
